@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timve - Futuristic Music Player</title>
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <audio id="audioPlayer" src=""></audio>
+  </head>
+  <body>
+    </body>
+</html>
+  
+  <body>
+    <div class="app-container">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <div class="nav-arrows">
+            <button class="icon-btn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="icon-btn">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <button
+            class="icon-btn sidebar-toggle-btn"
+            id="sidebarToggleBtn"
+            title="Toggle Sidebar"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="search-bar">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="What do you want to play?"
+            />
+          </div>
+        </div>
+        <div class="top-bar-right">
+          <button class="icon-btn user-profile-btn">
+            <img src="./images/ju-avatar.png" alt="User Profile" id="userProfilePic"/>
+          </button>
+        </div>
+      </header>
+
+      <div class="main-layout">
+        <nav class="sidebar-left">
+          <div class="sidebar-top">
+            <div class="logo">
+              <img src="./images/logo.png" alt="Timve Logo" />
+              <h1>Timve</h1>
+            </div>
+            <div class="sidebar-nav-main">
+              <a
+                href="#"
+                class="nav-item-main active"
+                data-section="homeSection"
+              >
+                <i class="fas fa-home"></i> <span>Home</span>
+              </a>
+              <a
+                href="#"
+                class="nav-item-main"
+                data-section="exploreSection"
+              >
+                <i class="fas fa-compass"></i> <span>Explore</span>
+              </a>
+              <a
+                href="#"
+                class="nav-item-main"
+                data-section="yourLibrarySection"
+              >
+                <i class="fas fa-headphones"></i> <span>Your Library</span>
+              </a>
+              <a
+                href="#"
+                class="nav-item-main"
+                data-section="playQueueSection"
+              >
+                <i class="fas fa-list-ul"></i> <span>Play Queue</span>
+              </a>
+              <a
+                href="#"
+                class="nav-item-main"
+                data-section="likedSongsSection"
+              >
+                <i class="fas fa-heart"></i> <span>Liked Songs</span>
+              </a>
+              <a
+                href="#"
+                class="nav-item-main"
+                data-section="settingsSection"
+              >
+                <i class="fas fa-cog"></i> <span>Settings</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="sidebar-nav-library">
+            <h3>Library</h3>
+            <a href="#" class="nav-item-library">
+              <i class="fas fa-history"></i> <span>History</span>
+            </a>
+            <a href="#" class="nav-item-library">
+              <i class="fas fa-plus-square"></i> <span>New Playlist</span>
+            </a>
+          </div>
+
+          <div class="sidebar-bottom">
+            <button class="sign-out-btn">
+              <i class="fas fa-sign-out-alt"></i> Sign Out
+            </button>
+          </div>
+        </nav>
+
+        <main class="main-content-area">
+          <section id="homeSection" class="content-section active">
+            <h2>Home</h2>
+            <div class="music-grid">
+              <div class="music-card">
+                <img src="./images/haim-album.png" alt="Haim Album" />
+                <h4>Don't Wanna Be Alone</h4>
+                <p>Haim</p>
+              </div>
+              <div class="music-card">
+                <img src="./images/haim-album.png" alt="Album Art 2" />
+                <h4>Another Song</h4>
+                <p>Artist Name</p>
+              </div>
+              <div class="music-card">
+                <img src="./images/haim-album.png" alt="Album Art 3" />
+                <h4>Best Track Ever</h4>
+                <p>Another Artist</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="exploreSection" class="content-section">
+            <h2>Explore New Music</h2>
+            <p>Discover new artists and genres here.</p>
+          </section>
+
+          <section id="yourLibrarySection" class="content-section">
+            <h2>Your Music Library</h2>
+            <p>Your saved songs and playlists.</p>
+          </section>
+
+          <section id="playQueueSection" class="content-section">
+            <h2>Current Play Queue</h2>
+            <div class="play-queue-list" id="playQueueList">
+              <li class="empty-queue">No songs in queue. Add some music!</li>
+            </div>
+            <div class="upload-section">
+              <h3>Upload Your Own Music</h3>
+              <input type="file" id="fileInput" accept="audio/*" multiple />
+              <button id="customUploadBtn" class="upload-btn">
+                <i class="fas fa-upload"></i> Choose Files
+              </button>
+              <p class="upload-notes">
+                (Only MP3, WAV, OGG, M4A, FLAC supported)
+              </p>
+            </div>
+          </section>
+
+          <section id="likedSongsSection" class="content-section">
+            <h2>Liked Songs</h2>
+            <div class="liked-songs-list" id="likedSongsList">
+              <p class="empty-message">You haven't liked any songs yet.</p>
+            </div>
+          </section>
+
+          <section id="settingsSection" class="content-section">
+            <h2>App Settings</h2>
+            <div class="settings-group">
+              <h3>Playback</h3>
+              <label for="playbackSpeed">Playback Speed:</label>
+              <input
+                type="range"
+                id="playbackSpeed"
+                min="0.5"
+                max="2"
+                step="0.25"
+                value="1"
+              />
+              <span id="playbackSpeedValue">1x</span>
+            </div>
+
+            <div class="settings-group">
+              <h3>Equalizer</h3>
+              <div class="equalizer-controls">
+                <div class="eq-band">
+                  <label>32Hz</label>
+                  <input
+                    type="range"
+                    data-band="0"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>64Hz</label>
+                  <input
+                    type="range"
+                    data-band="1"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>125Hz</label>
+                  <input
+                    type="range"
+                    data-band="2"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>250Hz</label>
+                  <input
+                    type="range"
+                    data-band="3"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>500Hz</label>
+                  <input
+                    type="range"
+                    data-band="4"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>1kHz</label>
+                  <input
+                    type="range"
+                    data-band="5"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>2kHz</label>
+                  <input
+                    type="range"
+                    data-band="6"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>4kHz</label>
+                  <input
+                    type="range"
+                    data-band="7"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>8kHz</label>
+                  <input
+                    type="range"
+                    data-band="8"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+                <div class="eq-band">
+                  <label>16kHz</label>
+                  <input
+                    type="range"
+                    data-band="9"
+                    min="-12"
+                    max="12"
+                    value="0"
+                    step="0.1"
+                    class="eq-slider"
+                  />
+                </div>
+              </div>
+              <button id="resetEqBtn" class="control-btn">
+                Reset Equalizer
+              </button>
+            </div>
+
+            <div class="settings-group">
+              <h3>Sleep Timer</h3>
+              <select id="sleepTimerSelect">
+                <option value="0">Off</option>
+                <option value="5">5 minutes</option>
+                <option value="15">15 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">60 minutes</option>
+              </select>
+              <button id="setSleepTimerBtn" class="control-btn">Set Timer</button>
+            </div>
+
+            <div class="settings-group">
+              <h3>Visualizer Display</h3>
+              <select id="visualizerDisplaySelect">
+                <option value="full">Full Visualizer</option>
+                <option value="hidden">Hidden</option>
+              </select>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <footer class="player-controls">
+        <div class="song-info">
+          <img
+            src="./images/haim-album.png"
+            alt="Current Album Art"
+            id="currentAlbumArt"
+          />
+          <div class="song-details">
+            <h4 id="currentSongTitle">Song Title</h4>
+            <p id="currentSongArtist">Artist Name</p>
+          </div>
+          <button class="control-btn" id="favoriteToggleBtn" title="Favorite">
+            <i class="far fa-heart"></i>
+          </button>
+        </div>
+
+        <div class="playback-controls">
+          <button class="control-btn" id="shuffleBtn" title="Shuffle">
+            <i class="fas fa-random"></i>
+          </button>
+          <button class="control-btn" id="prevBtn" title="Previous">
+            <i class="fas fa-backward"></i>
+          </button>
+          <button class="control-btn big-btn" id="playPauseBtn" title="Play/Pause">
+            <i class="fas fa-play"></i>
+          </button>
+          <button class="control-btn" id="nextBtn" title="Next">
+            <i class="fas fa-forward"></i>
+          </button>
+          <button class="control-btn" id="repeatBtn" title="Repeat">
+            <i class="fas fa-redo-alt"></i>
+          </button>
+        </div>
+
+        <div class="progress-bar-container">
+          <span id="currentTime">0:00</span>
+          <input
+            type="range"
+            id="progressBar"
+            min="0"
+            max="100"
+            value="0"
+            class="progress-bar"
+          />
+          <span id="duration">0:00</span>
+        </div>
+
+        <div class="extra-controls">
+          <button class="control-btn" id="lyricsToggleBtn" title="Lyrics">
+            <i class="fas fa-microphone"></i>
+          </button>
+          <button class="control-btn" id="shareToggleBtn" title="Share">
+            <i class="fas fa-share-alt"></i>
+          </button>
+          <div class="volume-control-group">
+            <button class="control-btn" id="currentVolumeIcon" title="Toggle Mute">
+              <i class="fas fa-volume-up"></i>
+            </button>
+            <input
+              type="range"
+              id="volumeSlider"
+              min="0"
+              max="1"
+              step="0.01"
+              value="1"
+              class="volume-slider"
+            />
+          </div>
+          <button class="control-btn" id="visualizerToggleBtn" title="Toggle Visualizer">
+            <i class="fas fa-chart-bar"></i>
+          </button>
+          <div class="visualizer-container">
+            <canvas id="visualizerCanvas" style="display: none"></canvas>
+            <div
+              id="visualizerPlaceholder"
+              style="
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #555;
+                font-size: 0.7em;
+                border: 1px dashed #333;
+              "
+            >
+              Visualizer
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
